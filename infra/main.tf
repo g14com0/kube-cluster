@@ -3,14 +3,14 @@ provider "google" {
 }
 
 module "google_kubernetes_cluster" {
-  source = "github.com/g14com0/kube-terraform//gke?ref=gkeDev"
+  source = "github.com/g14com0/kube-terraform//gke?ref=main"
 
-  name               = "test"
-  initial_node_count = 1
-  project            = "gcfr-352018"
-  remove_default_node_pool = false
+  name                     = "gcfr"
+  project                  = "gcfr-352018"
+  remove_default_node_pool = true
 
   regions = "europe-west3"
-  zone = ["europe-west3-b", "europe-west3-c"]
-  zonal = true
+  zone    = ["europe-west3-a"]
+  zonal   = false
+  node_pools_name = ["node1", "node2"]
 }

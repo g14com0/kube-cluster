@@ -1,0 +1,101 @@
+name: tf-template
+
+on: 
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      GOOGLE_CREDENTIALS:
+        required: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check -recursive -no-color
+        continue-on-error: true
+
+      - name: Terraform init
+        id: init
+        run: terraform -chdir=infra init -no-color
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform -chdir=infra validate -no-color
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform -chdir=infra plan -no-color
+        continue-on-error: true
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Update Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@0.9.0
+        env:
+          FMT: "${{ steps.fmt.outputs.stdout }}"
+          PLAN: "${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `
+              #### ${{ inputs.environment }} results:
+              <details><summary>Terraform Fmt: <code>${{ steps.fmt.outcome }}</code></summary><br>
+              \`\`\`\n
+              ${process.env.FMT}
+              \`\`\`
+              </details>
+              <details><summary>Terraform Plan: <code>${{ steps.plan.outcome }}</code></summary><br>
+              \`\`\`\n
+              ${process.env.PLAN}
+              \`\`\`
+              </details>
+            `;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+      - name: Terraform fmt Status
+        if: steps.fmt.outcome == 'failure'
+        run: |
+          echo "${{ steps.fmt.outputs.stdout }}" && exit 1
+      - name: Terraform plan Status
+        if: steps.plan.outcome == 'failure'
+        run: |
+          echo "${{ steps.plan.outputs.stdout }}" && exit 1
+  apply:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    needs: plan
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        id: init
+        run: terraform -chdir=infra init -no-color
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform -chdir=infra apply -no-color --auto-approve
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}

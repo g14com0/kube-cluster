@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - infra
+      - infra/**
   pull_request:
     branches:
       - main
     paths:
-      - infra
+      - infra/**
 permissions:
   pull-requests: write
   contents: read

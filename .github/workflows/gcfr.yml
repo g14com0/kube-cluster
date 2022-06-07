@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   gcfr:
-    uses: g14com0/terraform/.github/workflows/tf-template.yml@main
+    uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
     with:
       environment: gcfr
     secrets:

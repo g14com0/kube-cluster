@@ -53,15 +53,21 @@ jobs:
           script: |
             const output = `
               #### ${{ inputs.environment }} results:
+
               <details><summary>Terraform Fmt: <code>${{ steps.fmt.outcome }}</code></summary><br>
+
               \`\`\`\n
               ${process.env.FMT}
               \`\`\`
+
               </details>
+
               <details><summary>Terraform Plan: <code>${{ steps.plan.outcome }}</code></summary><br>
+
               \`\`\`\n
               ${process.env.PLAN}
               \`\`\`
+
               </details>
             `;
             github.issues.createComment({
@@ -70,14 +76,17 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+
       - name: Terraform fmt Status
         if: steps.fmt.outcome == 'failure'
         run: |
           echo "${{ steps.fmt.outputs.stdout }}" && exit 1
+
       - name: Terraform plan Status
         if: steps.plan.outcome == 'failure'
         run: |
           echo "${{ steps.plan.outputs.stdout }}" && exit 1
+
   apply:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'

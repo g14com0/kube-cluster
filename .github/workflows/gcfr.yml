@@ -1,0 +1,24 @@
+name: gcfr
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - infra
+  pull_request:
+    branches:
+      - main
+    paths:
+      - infra
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  gcfr:
+    uses: g14com0/terraform/.github/workflows/tf-template.yml@main
+    with:
+      environment: gcfr
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

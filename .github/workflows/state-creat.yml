@@ -6,12 +6,12 @@ on:
     branches:
       - main
     paths:
-      - infra/**
+      - gcs-tfstate/**
   pull_request:
     branches:
       - main
     paths:
-      - infra/**
+      - gcs-tfstate/**
 permissions:
   pull-requests: write
   contents: read

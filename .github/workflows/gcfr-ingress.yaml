@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - id: gcloud auth
+      - name: gcloud auth
         uses: google-github-actions/auth@v0
         with:
           credentials_json: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

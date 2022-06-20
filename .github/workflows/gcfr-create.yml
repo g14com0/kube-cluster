@@ -1,4 +1,5 @@
-name: gcfr
+---
+name: gcfr-create
 on:
   workflow_dispatch:
   push:

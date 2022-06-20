@@ -1,0 +1,21 @@
+---
+name: gcfr-destroy
+on:
+  workflow_dispatch:
+
+jobs:
+  sbx_bucket:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform -chdir=infra init
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform destroy
+        run: terraform -chdir=infra destroy --auto-approve
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}

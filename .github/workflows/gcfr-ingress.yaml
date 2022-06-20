@@ -1,0 +1,30 @@
+---
+name: gcfr-ingress
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - components/ingress/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - components/ingress/**
+
+jobs:
+  gcfr-ingress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: namespace apply
+        run: kubectl apply -R -f namespace
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+      - name: helm install
+        run: helm upgrade --install  -f ./components/ingress/values.yaml ingress ./components/ingress
+        env:
+            GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

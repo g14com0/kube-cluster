@@ -3,7 +3,7 @@ provider "google" {
 }
 
 module "google_kubernetes_cluster" {
-  source = "github.com/g14com0/kube-terraform//gke?ref=develop"
+  source = "github.com/g14com0/terraform-modules//gke?ref=develop"
 
   name                     = "gcfr"
   project                  = "gcfr-352018"

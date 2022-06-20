@@ -3,7 +3,7 @@ provider "google" {
 }
 
 module "google_storage_bucket" {
-  source = "github.com/g14com0/kube-terraform//gcs?ref=main"
+  source = "github.com/g14com0/terraform-modules//gcs?ref=main"
 
   name     = "gcfr-352018"
   location = "EU"

@@ -18,6 +18,6 @@ jobs:
 
       - name: Terraform Destroy
         id: destroy
-        run: terraform -chdir=${{ inputs.path }} destroy -no-color --auto-approve
+        run: terraform -chdir=infra destroy -no-color --auto-approve
         env:
             GCFR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}

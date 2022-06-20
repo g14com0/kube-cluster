@@ -14,7 +14,7 @@ module "google_kubernetes_cluster" {
   zonal           = false
   node_pools = [
     {
-      machine_type              = "e2-medium"
+      machine_type              = "e2-small"
       image_type                = "COS_CONTAINERD"
     },
   ]

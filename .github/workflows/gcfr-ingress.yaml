@@ -30,7 +30,7 @@ jobs:
             GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
       
       - name: namespace apply
-        run: kubectl apply -R -f namespace
+        run: kubectl apply -f namespace/ingress.yaml
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 

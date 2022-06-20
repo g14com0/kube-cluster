@@ -6,6 +6,9 @@ on:
       environment:
         required: true
         type: string
+      path:
+        required: true
+        type: string
     secrets:
       GOOGLE_CREDENTIALS:
         required: true
@@ -25,19 +28,19 @@ jobs:
 
       - name: Terraform init
         id: init
-        run: terraform -chdir=infra init -no-color
+        run: terraform -chdir=${{ inputs.environment }} init -no-color
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Terraform Validate
         id: validate
-        run: terraform -chdir=infra validate -no-color
+        run: terraform -chdir=${{ inputs.environment }} validate -no-color
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Terraform Plan
         id: plan
-        run: terraform -chdir=infra plan -no-color
+        run: terraform -chdir=${{ inputs.environment }} plan -no-color
         continue-on-error: true
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
@@ -97,12 +100,12 @@ jobs:
 
       - name: Terraform init
         id: init
-        run: terraform -chdir=infra init -no-color
+        run: terraform -chdir=${{ inputs.environment }} init -no-color
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Terraform Apply
         id: apply
-        run: terraform -chdir=infra apply -no-color --auto-approve
+        run: terraform -chdir=${{ inputs.environment }} apply -no-color --auto-approve
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}

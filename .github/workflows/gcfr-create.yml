@@ -21,5 +21,33 @@ jobs:
     uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
     with:
       environment: gcfr
+      path: infra
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+---
+name: state-create
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - infra/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - infra/**
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  gcfr:
+    uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
+    with:
+      environment: gcfr
+      path: gcs-tfstate
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

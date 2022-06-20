@@ -20,4 +20,4 @@ jobs:
         id: destroy
         run: terraform -chdir=infra destroy -no-color --auto-approve
         env:
-            GCFR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+            GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

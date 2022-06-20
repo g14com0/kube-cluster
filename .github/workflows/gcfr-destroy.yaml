@@ -12,12 +12,12 @@ jobs:
 
       - name: Terraform init
         id: init
-        run: terraform -chdir=infra init -no-color
+        run: terraform -chdir=infra/gke init -no-color
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 
       - name: Terraform Destroy
         id: destroy
-        run: terraform -chdir=infra destroy -no-color --auto-approve
+        run: terraform -chdir=infra/gke destroy -no-color --auto-approve
         env:
             GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

@@ -11,6 +11,6 @@ jobs:
     uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
     with:
       environment: gcfr
-      path: gcs-tfstate
+      path: infra/tfs
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

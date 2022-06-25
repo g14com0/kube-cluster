@@ -17,7 +17,15 @@ permissions:
   contents: read
 
 jobs:
-  plan:
+  gcaPlan:
+    uses: g14com0/actions-template/.github/workflows/plan.yml@main
+    with:
+      environment: gcfr
+      pathToPlan: infra/gca
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+  gkePlan:
     uses: g14com0/actions-template/.github/workflows/plan.yml@main
     with:
       environment: gcfr
@@ -25,9 +33,18 @@ jobs:
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 
-  apply:
+  gcaApply:
     uses: g14com0/actions-template/.github/workflows/apply.yml@main
-    needs: plan
+    needs: [gkePlan, gcaPlan]
+    with:
+      environment: gcfr
+      pathToApply: infra/gca
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+  gkeApply:
+    uses: g14com0/actions-template/.github/workflows/apply.yml@main
+    needs: [gkePlan, gcaPlan, gcaApply]
     with:
       environment: gcfr
       pathToApply: infra/gke

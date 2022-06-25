@@ -3,7 +3,7 @@ terraform {
 
   backend "gcs" {
     bucket = "gcfr-352018"
-    prefix = "gke/terraform/state"
+    prefix = "gca/terraform/state"
   }
 
   required_providers {

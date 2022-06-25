@@ -17,10 +17,18 @@ permissions:
   contents: read
 
 jobs:
-  gcfr:
-    uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
+  plan:
+    uses: g14com0/actions-template/.github/workflows/plan.yml@main
     with:
       environment: gcfr
       path: infra/gke
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+#  gcfr:
+#    uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
+#    with:
+#      environment: gcfr
+#      path: infra/gke
+#    secrets:
+#      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

@@ -1,4 +1,4 @@
-name: gcfr-ingress
+name: gcfr-certmanager
 on:
   workflow_dispatch:
 
@@ -22,7 +22,10 @@ jobs:
     - name: Helm download
       run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-    - name: ingress install
+    - name: certmanager install
       run: |
-        helm dependency update applications/ingress/
-        helm upgrade -i --create-namespace --namespace ingress -f applications/ingress/values.yaml ingress applications/ingress
+        
+        kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.crds.yaml
+
+        helm dependency update applications/cert-manager/
+        helm upgrade -i --create-namespace --namespace cert-manager -f applications/cert-manager/values.yaml cert-manager applications/cert-manager

@@ -2,6 +2,7 @@
 name: gcfr-gke-cluster
 on:
   workflow_dispatch:
+  repository_dispatch:
   push:
     branches:
       - main

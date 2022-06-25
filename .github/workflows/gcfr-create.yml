@@ -56,6 +56,6 @@ jobs:
     needs: [gkeApply]
     with:
       environment: gcfr
-      pathToApply: infra/gke
+      pathToDestroy: infra/gke
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

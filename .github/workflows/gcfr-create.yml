@@ -25,10 +25,11 @@ jobs:
     secrets:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 
-#  gcfr:
-#    uses: g14com0/kube-cluster/.github/workflows/tf-template.yml@main
-#    with:
-#      environment: gcfr
-#      path: infra/gke
-#    secrets:
-#      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+  apply:
+    needs: plan
+    uses: g14com0/actions-template/.github/workflows/apply.yml@main
+    with:
+      environment: gcfr
+      pathToApply: infra/gke
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

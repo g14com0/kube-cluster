@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   plan:
-    uses: g14com0/actions-template/plan.yml@main
+    uses: g14com0/actions-template/.github/workflows/plan.yml@main
     with:
       environment: gcfr
       path: infra/gke

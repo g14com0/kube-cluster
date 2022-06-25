@@ -29,9 +29,4 @@ jobs:
         namespace: 'ingress'
         chart: 'applications/ingress'
         token: '${{ github.token }}'
-        values: |
-          name: foobar
-        value-files: >-
-        [
-          "application/ingress/values.yaml"
-        ]
+        value-files: "application/ingress/values.yaml"

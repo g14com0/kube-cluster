@@ -26,7 +26,6 @@ jobs:
       GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 
   apply:
-    needs: plan
     uses: g14com0/actions-template/.github/workflows/apply.yml@main
     with:
       environment: gcfr

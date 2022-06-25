@@ -1,5 +1,6 @@
-name: Deploy
-on: ['deployment']
+name: gcfr-ingress
+on:
+  workflow_dispatch:
 
 jobs:
   deployment:
@@ -21,16 +22,16 @@ jobs:
     - name: 'get-node'
       run: 'kubectl get node'
 
-#    - name: 'Deploy'
-#      uses: 'deliverybot/helm@v1'
-#      with:
-#        release: 'ingress'
-#        namespace: 'ingress'
-#        chart: 'applications/ingress'
-#        token: '${{ github.token }}'
-#        values: |
-#          name: foobar
-#        value-files: >-
-#        [
-#          "application/ingress/values.yaml"
-#        ]
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'ingress'
+        namespace: 'ingress'
+        chart: 'applications/ingress'
+        token: '${{ github.token }}'
+        values: |
+          name: foobar
+        value-files: >-
+        [
+          "application/ingress/values.yaml"
+        ]

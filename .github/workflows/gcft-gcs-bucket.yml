@@ -1,0 +1,22 @@
+---
+name: gcfr-gcs-bucket
+on:
+  workflow_dispatch:
+
+jobs:
+  tfsPlan:
+    uses: g14com0/actions-template/.github/workflows/plan.yml@main
+    with:
+      environment: gcfr
+      pathToPlan: infra/tfs
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+  tfsApply:
+    uses: g14com0/actions-template/.github/workflows/apply.yml@main
+    needs: tfsPlan
+    with:
+      environment: gcfr
+      pathToApply: infra/tfs
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}

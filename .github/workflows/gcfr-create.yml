@@ -1,5 +1,5 @@
 ---
-name: gcfr-create
+name: gcfr-gke-cluster
 on:
   workflow_dispatch:
   push:
@@ -44,7 +44,16 @@ jobs:
 
   gkeApply:
     uses: g14com0/actions-template/.github/workflows/apply.yml@main
-    needs: [gkePlan, gcaPlan, gcaApply]
+    needs: [gcaApply]
+    with:
+      environment: gcfr
+      pathToApply: infra/gke
+    secrets:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
+
+  gkeDestroy:
+    uses: g14com0/actions-template/.github/workflows/destroy.yml@main
+    needs: [gkeApply]
     with:
       environment: gcfr
       pathToApply: infra/gke

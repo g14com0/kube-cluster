@@ -27,6 +27,7 @@ jobs:
 
   apply:
     uses: g14com0/actions-template/.github/workflows/apply.yml@main
+    needs: plan
     with:
       environment: gcfr
       pathToApply: infra/gke

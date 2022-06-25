@@ -4,29 +4,25 @@ on:
 
 jobs:
   deployment:
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
 
-    - name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0'
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0
       with:
-        credentials_json: '${{ secrets.GCFR_GOOGLE_CREDENTIALS }}'
+        credentials_json: ${{ secrets.GCFR_GOOGLE_CREDENTIALS }}
 
-    - name: 'get-credentials'
-      uses: 'google-github-actions/get-gke-credentials@v0'
+    - name: get-credentials
+      uses: google-github-actions/get-gke-credentials@v0
       with:
-        cluster_name: 'gcfr'
-        location: 'europe-west3'
+        cluster_name: gcfr
+        location: europe-west3
 
-    - name: 'get-node'
-      run: 'kubectl get node'
+    - name: Helm download
+      run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        release: 'ingress'
-        namespace: 'ingress'
-        chart: 'applications/ingress'
-        token: '${{ github.token }}'
-        value-files: "application/ingress/values.yaml"
+    - name: Helm install
+      run: |
+        helm dependency update applications/ingress/
+        helm upgrade -i --create-namespace --namespace ingress -f applications/ingress/values.yaml ingress applications/ingress

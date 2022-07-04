@@ -8,6 +8,7 @@ spec:
   - hosts:
       - gcfr.xyz
     secretName: react-tls
+  ingressClassName: nginx
   rules:
   - host: gcfr.xyz
     http:
@@ -18,4 +19,4 @@ spec:
           service: 
             name: react-service
             port:
-              number: 3000
+              number: 8080

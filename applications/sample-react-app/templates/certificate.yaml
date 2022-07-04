@@ -7,5 +7,6 @@ spec:
   dnsNames:
     - gcfr.xyz
   secretName: react-tls
-  issuerRef: letsencrypt-clusterissuer
-  kind: ClusterIssuer
+  issuerRef:
+    name: letsencrypt-clusterissuer
+    kind: ClusterIssuer

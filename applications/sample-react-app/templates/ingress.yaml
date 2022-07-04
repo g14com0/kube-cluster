@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-ingress
+spec:
+  tls:
+  - hosts:
+      - gcfr.xyz
+    secretName: react-tls
+  rules:
+  - host: gcfr.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: react-service
+            port:
+              number: 3000

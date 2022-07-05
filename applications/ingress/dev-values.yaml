@@ -10,3 +10,5 @@ dev:
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"
+prd:
+  enabled: false

@@ -5,7 +5,7 @@ ingress-nginx:
     image:
       registry: k8s.gcr.io
       image: ingress-nginx/controller
-      tag: "v1.2.0"
+      tag: "v1.2.1"
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"

@@ -1,5 +1,5 @@
 ---
-prd:
+ingress-nginx-prd:
   enabled: false
   fullnameOverride: "ingress"
   controller:
@@ -10,3 +10,6 @@ prd:
     service:
       type: "LoadBalancer"
       loadBalancerIP: "TBD"
+
+ingress-nginx-dev:
+  enabled: false

@@ -1,5 +1,5 @@
 ---
-dev:
+ingress-nginx-dev:
   enabled: true
   fullnameOverride: "ingress"
   controller:
@@ -10,5 +10,6 @@ dev:
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"
-prd:
+
+ingress-nginx-prd:
   enabled: false

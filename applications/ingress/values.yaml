@@ -2,12 +2,14 @@
 ingress-nginx:
   prd:
     enabled: true
+  dev:
+    enabled: false
   fullnameOverride: "ingresss"
   controller:
-    image:
-      registry: k8s.gcr.io
-      image: ingress-nginx/controller
-      tag: "v1.2.1"
+#    image:
+#      registry: k8s.gcr.io
+#      image: ingress-nginx/controller
+#      tag: "v1.2.1"
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"

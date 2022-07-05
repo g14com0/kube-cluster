@@ -11,5 +11,6 @@ ingress-nginx-prd:
       type: "LoadBalancer"
       loadBalancerIP: "TBD"
 
+#Disabling dependencies of other environments
 ingress-nginx-dev:
   enabled: false

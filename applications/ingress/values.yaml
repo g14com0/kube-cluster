@@ -1,7 +1,7 @@
 ---
 prd:
-  enabled: true
-  fullnameOverride: "ingresss"
+  enabled: false
+  fullnameOverride: "ingress"
   controller:
 #    image:
 #      registry: k8s.gcr.io
@@ -11,4 +11,13 @@ prd:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"
 dev:
-  enabled: false
+  enabled: true
+  fullnameOverride: "ingress"
+  controller:
+#    image:
+#      registry: k8s.gcr.io
+#      image: ingress-nginx/controller
+#      tag: "v1.2.1"
+    service:
+      type: "LoadBalancer"
+      loadBalancerIP: "34.107.31.210"

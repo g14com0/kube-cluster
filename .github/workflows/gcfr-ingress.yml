@@ -25,4 +25,4 @@ jobs:
     - name: ingress install
       run: |
         helm dependency update applications/ingress/
-        helm upgrade -i --create-namespace --namespace ingress -f applications/ingress/values.yaml ingress applications/ingress
+        helm upgrade -i --create-namespace --namespace ingress -f applications/ingress/dev-values.yaml ingress applications/ingress

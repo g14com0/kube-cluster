@@ -1,0 +1,16 @@
+---
+ingress-nginx-prd:
+  enabled: false
+  fullnameOverride: "ingress"
+  controller:
+    image:
+      registry: k8s.gcr.io
+      image: ingress-nginx/controller
+      tag: "v1.2.1"
+    service:
+      type: "LoadBalancer"
+      loadBalancerIP: "TBD"
+
+#Disabling dependencies of other environments
+ingress-nginx-dev:
+  enabled: false

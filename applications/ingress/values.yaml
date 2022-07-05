@@ -1,7 +1,6 @@
 ---
 prd:
-  prd:
-    enabled: true
+  enabled: true
   fullnameOverride: "ingresss"
   controller:
 #    image:
@@ -11,3 +10,5 @@ prd:
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"
+dev:
+  enabled: false

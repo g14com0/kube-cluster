@@ -1,5 +1,5 @@
 ---
-ingress-nginx:
+prd:
   prd:
     enabled: true
   fullnameOverride: "ingresss"

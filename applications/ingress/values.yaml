@@ -2,6 +2,7 @@
 ingress-nginx:
   fullnameOverride: "ingress-controller"
   controller:
+    name: ""
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"

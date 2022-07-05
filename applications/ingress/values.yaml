@@ -2,7 +2,7 @@
 ingress-nginx:
   prd:
     enabled: false
-  fullnameOverride: "ingress"
+  fullnameOverride: "ingresss"
   controller:
     image:
       registry: k8s.gcr.io

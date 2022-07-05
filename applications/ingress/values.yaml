@@ -2,8 +2,6 @@
 ingress-nginx:
   prd:
     enabled: true
-  dev:
-    enabled: false
   fullnameOverride: "ingresss"
   controller:
 #    image:

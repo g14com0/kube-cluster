@@ -6,11 +6,11 @@ dependencies:
   - name: ingress-nginx
     version: 4.1.4
     repository: https://kubernetes.github.io/ingress-nginx
-    condition: ingress-nginx-dev.enabled
+    condition: enabled.ingress-nginx-dev
     alias: ingress-nginx-dev
 
   - name: ingress-nginx
     version: 4.1.2
     repository: https://kubernetes.github.io/ingress-nginx
-    condition: ingress-nginx-prd.enabled
+    condition: enabled.ingress-nginx-prd
     alias: ingress-nginx-prd

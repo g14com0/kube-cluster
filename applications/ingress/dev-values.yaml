@@ -1,6 +1,10 @@
 ---
+enabled:
+  ingress-nginx-dev: true
+  ingress-nginx-prd: false
+
+
 ingress-nginx-dev:
-  enabled: true
   fullnameOverride: "ingress"
   controller:
     image:
@@ -10,7 +14,3 @@ ingress-nginx-dev:
     service:
       type: "LoadBalancer"
       loadBalancerIP: "34.107.31.210"
-
-#Disabling dependencies of other environments
-ingress-nginx-prd:
-  enabled: false
